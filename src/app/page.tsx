@@ -13,13 +13,13 @@ type FilterValue = "Todos" | ProductCategory;
 
 const highlights = ["Catálogo visual", "Productos por categoría", "Consulta directa", "Link para Instagram"];
 
-function HeroImage({ product, className = "" }: { product: Product; className?: string }) {
+function HeroImage({ product, className = "", priority = false }: { product: Product; className?: string; priority?: boolean }) {
   const [imageError, setImageError] = useState(false);
 
   return (
     <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br from-rose-100 to-pink-50 shadow-soft ${className}`}>
       {!imageError ? (
-        <Image src={product.image} alt={product.name} fill className="object-cover" priority onError={() => setImageError(true)} />
+        <Image src={product.image} alt={product.name} fill className="object-cover" priority={priority} onError={() => setImageError(true)} />
       ) : (
         <div className="flex h-full items-end p-4 text-sm font-semibold text-brand-700">{product.name}</div>
       )}
@@ -66,6 +66,7 @@ export default function Home() {
     () => (filter === "Todos" ? products : products.filter((product) => product.category === filter)),
     [filter]
   );
+  const heroProduct = featuredProducts[0];
 
   return (
     <main id="inicio" className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50">
@@ -79,6 +80,14 @@ export default function Home() {
             <h2 className="text-xl font-semibold text-zinc-700">Catálogo visual para mostrar productos y vender más ordenado</h2>
             <p className="max-w-xl text-zinc-600">Una vitrina simple para que tus clientas vean productos, elijan y consulten directo por WhatsApp.</p>
           </div>
+
+          {heroProduct && (
+            <HeroImage
+              product={heroProduct}
+              priority
+              className="h-52 border border-white/80 md:hidden"
+            />
+          )}
 
           <div className="flex flex-wrap gap-2">
             {highlights.map((item) => (
@@ -94,8 +103,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid h-[520px] grid-cols-2 grid-rows-2 gap-3 md:h-[560px]">
-          {featuredProducts[0] && <HeroImage product={featuredProducts[0]} className="col-span-2 row-span-1" />}
+        <div className="hidden h-[560px] grid-cols-2 grid-rows-2 gap-3 md:grid">
+          {featuredProducts[0] && <HeroImage product={featuredProducts[0]} priority className="col-span-2 row-span-1" />}
           {featuredProducts.slice(1, 3).map((product) => (
             <HeroImage key={product.id} product={product} />
           ))}
