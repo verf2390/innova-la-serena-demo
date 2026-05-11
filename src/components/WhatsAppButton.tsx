@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-// Reemplazar por el número real en formato internacional sin + ni espacios.
-export const WHATSAPP_NUMBER = "569XXXXXXXX";
+// Número temporal para la demo en formato internacional sin + ni espacios.
+export const WHATSAPP_NUMBER = "56961425029";
 
 type WhatsAppButtonProps = {
   message: string;
