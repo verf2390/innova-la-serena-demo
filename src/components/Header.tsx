@@ -15,7 +15,7 @@ export default function Header() {
         <nav className="hidden items-center gap-4 text-sm text-zinc-600 md:flex">
           {links.map((link) => (<a key={link.label} href={link.href} className="hover:text-brand-700">{link.label}</a>))}
         </nav>
-        <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información general.">Consultar por WhatsApp</WhatsAppButton>
+        <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información.">Consultar por WhatsApp</WhatsAppButton>
       </div>
     </header>
   );

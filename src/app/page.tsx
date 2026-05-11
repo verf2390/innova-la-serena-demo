@@ -59,7 +59,7 @@ export default function Home() {
           <p className="text-zinc-600">Descubre una selección de productos para tu hogar y consulta directamente por WhatsApp.</p>
           <div className="flex flex-wrap gap-3">
             <a href="#productos" className="inline-flex rounded-full border border-brand-500 px-5 py-2.5 text-sm font-semibold text-brand-700 transition hover:bg-brand-50">Ver productos</a>
-            <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero consultar por productos.">Consultar por WhatsApp</WhatsAppButton>
+            <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información.">Consultar por WhatsApp</WhatsAppButton>
           </div>
         </div>
         <div className="rounded-3xl bg-white p-6 shadow-soft">
@@ -114,7 +114,7 @@ export default function Home() {
           <div className="mt-4 flex flex-wrap gap-3">
             <a href="https://www.instagram.com/innovalaserena918/" target="_blank" rel="noreferrer" className="rounded-full border border-rose-200 px-4 py-2 text-sm hover:border-brand-500 hover:text-brand-700">Instagram</a>
             <a href="https://www.facebook.com/innovaserena?_rdr" target="_blank" rel="noreferrer" className="rounded-full border border-rose-200 px-4 py-2 text-sm hover:border-brand-500 hover:text-brand-700">Facebook</a>
-            <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero información por WhatsApp.">WhatsApp</WhatsAppButton>
+            <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información.">WhatsApp</WhatsAppButton>
           </div>
         </div>
       </section>
