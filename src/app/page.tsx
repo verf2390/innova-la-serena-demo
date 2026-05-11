@@ -11,30 +11,49 @@ import { products, type Product, type ProductCategory } from "@/data/products";
 
 type FilterValue = "Todos" | ProductCategory;
 
-const benefitCards = [
-  "Catálogo ordenado",
-  "Consulta rápida por WhatsApp",
-  "Productos para regalo y hogar",
-  "Atención en La Serena"
-];
+const highlights = ["Catálogo visual", "Productos por categoría", "Consulta directa", "Link para Instagram"];
+
+function HeroImage({ product, className = "" }: { product: Product; className?: string }) {
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br from-rose-100 to-pink-50 shadow-soft ${className}`}>
+      {!imageError ? (
+        <Image src={product.image} alt={product.name} fill className="object-cover" priority onError={() => setImageError(true)} />
+      ) : (
+        <div className="flex h-full items-end p-4 text-sm font-semibold text-brand-700">{product.name}</div>
+      )}
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent p-4 text-white">
+        <p className="text-xs font-medium opacity-90">{product.category}</p>
+        <p className="font-semibold">{product.name}</p>
+      </div>
+    </div>
+  );
+}
 
 function FeaturedCard({ product }: { product: Product }) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <article className="overflow-hidden rounded-3xl border border-rose-100 bg-white shadow-sm">
-      <div className="relative h-60 bg-gradient-to-br from-rose-100 via-pink-50 to-violet-100">
+    <article className="group overflow-hidden rounded-3xl border border-rose-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+      <div className="relative h-72 bg-gradient-to-br from-rose-100 via-pink-50 to-violet-100">
         {!imageError ? (
-          <Image src={product.image} alt={product.name} fill className="object-cover" onError={() => setImageError(true)} />
+          <Image src={product.image} alt={product.name} fill className="object-cover transition duration-500 group-hover:scale-105" onError={() => setImageError(true)} />
         ) : (
           <div className="flex h-full items-end p-5">
-            <p className="rounded-xl bg-white/85 px-3 py-2 text-sm font-semibold text-zinc-700">{product.name}</p>
+            <p className="rounded-xl bg-white/90 px-3 py-2 text-sm font-semibold text-zinc-700">{product.name}</p>
           </div>
         )}
+        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand-700 shadow-sm">{product.category}</span>
       </div>
-      <div className="space-y-1 p-4">
-        <p className="text-sm font-semibold text-brand-700">{product.category}</p>
-        <h3 className="font-semibold">{product.name}</h3>
+      <div className="flex items-center justify-between gap-3 p-4">
+        <div>
+          <h3 className="font-bold text-zinc-900">{product.name}</h3>
+          <p className="text-sm font-semibold text-brand-700">{product.priceLabel}</p>
+        </div>
+        <WhatsAppButton message={`Hola, vengo desde el catálogo web de Innova La Serena. Me interesa consultar por: ${product.name}`} className="px-4 py-2 text-xs">
+          Consultar
+        </WhatsAppButton>
       </div>
     </article>
   );
@@ -51,29 +70,41 @@ export default function Home() {
   return (
     <main id="inicio" className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50">
       <Header />
-      <section className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 md:grid-cols-2 md:items-center">
-        <div className="space-y-4">
-          <p className="inline-block rounded-full bg-white px-4 py-1 text-sm font-semibold text-brand-700 shadow-sm">Tu vitrina digital de muebles y decoración.</p>
-          <h1 className="text-4xl font-bold leading-tight text-zinc-900">Innova La Serena</h1>
-          <h2 className="text-xl font-semibold text-zinc-700">Muebles, tapizados y detalles para transformar tus espacios</h2>
-          <p className="text-zinc-600">Descubre una selección de productos para tu hogar y consulta directamente por WhatsApp.</p>
-          <div className="flex flex-wrap gap-3">
-            <a href="#productos" className="inline-flex rounded-full border border-brand-500 px-5 py-2.5 text-sm font-semibold text-brand-700 transition hover:bg-brand-50">Ver productos</a>
-            <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información.">Consultar por WhatsApp</WhatsAppButton>
+
+      <section className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-8 md:grid-cols-[0.9fr_1.1fr] md:items-center md:py-12">
+        <div className="space-y-5">
+          <p className="inline-block rounded-full bg-white px-4 py-1 text-sm font-semibold text-brand-700 shadow-sm">Instagram atrae. La web ordena y vende.</p>
+          <div className="space-y-3">
+            <h1 className="text-4xl font-black leading-tight text-zinc-900 md:text-5xl">Innova La Serena</h1>
+            <h2 className="text-xl font-semibold text-zinc-700">Catálogo visual para mostrar productos y vender más ordenado</h2>
+            <p className="max-w-xl text-zinc-600">Una vitrina simple para que tus clientas vean productos, elijan y consulten directo por WhatsApp.</p>
           </div>
-        </div>
-        <div className="rounded-3xl bg-white p-6 shadow-soft">
-          <div className="grid grid-cols-2 gap-3">
-            {featuredProducts.map((item) => (
-              <div key={item.id} className="rounded-2xl bg-gradient-to-br from-pink-100 to-rose-50 p-4 text-sm font-medium text-zinc-700">{item.name}</div>
+
+          <div className="flex flex-wrap gap-2">
+            {highlights.map((item) => (
+              <span key={item} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-zinc-700 shadow-sm">{item}</span>
             ))}
           </div>
+
+          <div className="grid gap-3 sm:flex">
+            <a href="#productos" className="inline-flex items-center justify-center rounded-full border border-brand-500 px-6 py-3 text-base font-bold text-brand-700 transition hover:bg-brand-50">Ver catálogo</a>
+            <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información." className="py-3 text-base">
+              Cotizar por WhatsApp
+            </WhatsAppButton>
+          </div>
+        </div>
+
+        <div className="grid h-[520px] grid-cols-2 grid-rows-2 gap-3 md:h-[560px]">
+          {featuredProducts[0] && <HeroImage product={featuredProducts[0]} className="col-span-2 row-span-1" />}
+          {featuredProducts.slice(1, 3).map((product) => (
+            <HeroImage key={product.id} product={product} />
+          ))}
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 pb-12">
         <div className="grid gap-4 md:grid-cols-4">
-          {benefitCards.map((benefit) => (
+          {highlights.map((benefit) => (
             <article key={benefit} className="rounded-2xl border border-rose-100 bg-white p-4 shadow-sm">
               <h3 className="font-semibold text-zinc-800">{benefit}</h3>
             </article>
@@ -82,7 +113,13 @@ export default function Home() {
       </section>
 
       <section className="mx-auto w-full max-w-6xl space-y-5 px-4 pb-14">
-        <h2 className="text-2xl font-bold">Productos destacados</h2>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-brand-700">Muestra visual</p>
+            <h2 className="text-2xl font-black text-zinc-900">Productos destacados</h2>
+          </div>
+          <p className="max-w-md text-sm text-zinc-600">Fotos grandes primero, información clara y botón directo para consultar.</p>
+        </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {featuredProducts.map((product) => <FeaturedCard key={`featured-${product.id}`} product={product} />)}
         </div>
@@ -90,8 +127,9 @@ export default function Home() {
 
       <section id="productos" className="mx-auto w-full max-w-6xl space-y-6 px-4 pb-14">
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Productos</h2>
-          <p className="text-sm text-zinc-600">Filtra por categoría y consulta directo por WhatsApp.</p>
+          <p className="text-sm font-semibold text-brand-700">Catálogo</p>
+          <h2 className="text-2xl font-black text-zinc-900">Elige una categoría</h2>
+          <p className="text-sm text-zinc-600">Menos texto, más producto y consultas rápidas por WhatsApp.</p>
         </div>
         <CategoryFilter active={filter} onChange={setFilter} />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -100,20 +138,27 @@ export default function Home() {
       </section>
 
       <section id="como-comprar" className="mx-auto w-full max-w-6xl space-y-4 px-4 pb-14">
-        <h2 className="text-2xl font-bold">Cómo comprar</h2>
-        <ol className="space-y-3">
-          {["Revisa el catálogo", "Consulta por WhatsApp", "Coordina disponibilidad, pago y entrega", "Recibe o retira tu producto"].map((step, idx) => (
-            <li key={step} className="flex items-start gap-3 rounded-2xl border border-rose-100 bg-white p-4"><span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700">{idx + 1}</span><p>{step}</p></li>
+        <h2 className="text-2xl font-black text-zinc-900">Cómo comprar</h2>
+        <ol className="grid gap-3 md:grid-cols-4">
+          {["Revisa", "Elige", "Consulta", "Coordina"].map((step, idx) => (
+            <li key={step} className="rounded-2xl border border-rose-100 bg-white p-4 shadow-sm">
+              <span className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-100 text-sm font-bold text-brand-700">{idx + 1}</span>
+              <p className="font-bold text-zinc-900">{step}</p>
+              <p className="mt-1 text-sm text-zinc-600">{["Mira el catálogo", "Escoge un producto", "Escribe por WhatsApp", "Pago, retiro o entrega"][idx]}</p>
+            </li>
           ))}
         </ol>
       </section>
 
       <section id="contacto" className="mx-auto w-full max-w-6xl px-4 pb-4">
-        <div className="rounded-3xl border border-rose-100 bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-bold">Redes y contacto</h2>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <a href="https://www.instagram.com/innovalaserena918/" target="_blank" rel="noreferrer" className="rounded-full border border-rose-200 px-4 py-2 text-sm hover:border-brand-500 hover:text-brand-700">Instagram</a>
-            <a href="https://www.facebook.com/innovaserena?_rdr" target="_blank" rel="noreferrer" className="rounded-full border border-rose-200 px-4 py-2 text-sm hover:border-brand-500 hover:text-brand-700">Facebook</a>
+        <div className="rounded-3xl border border-rose-100 bg-white p-6 shadow-sm md:flex md:items-center md:justify-between md:gap-6">
+          <div>
+            <p className="text-sm font-semibold text-brand-700">Contacto directo</p>
+            <h2 className="text-2xl font-black text-zinc-900">Comparte un solo link y recibe consultas</h2>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-3 md:mt-0">
+            <a href="https://www.instagram.com/innovalaserena918/" target="_blank" rel="noreferrer" className="rounded-full border border-rose-200 px-4 py-2 text-sm font-semibold hover:border-brand-500 hover:text-brand-700">Instagram</a>
+            <a href="https://www.facebook.com/innovaserena?_rdr" target="_blank" rel="noreferrer" className="rounded-full border border-rose-200 px-4 py-2 text-sm font-semibold hover:border-brand-500 hover:text-brand-700">Facebook</a>
             <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información.">WhatsApp</WhatsAppButton>
           </div>
         </div>
