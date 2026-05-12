@@ -9,7 +9,7 @@ type ProductCardProps = { product: Product };
 
 export default function ProductCard({ product }: ProductCardProps) {
   const [imageError, setImageError] = useState(false);
-  const message = `Hola, vengo desde el catálogo web de Innova La Serena. Me interesa consultar por: ${product.name}`;
+  const message = `Hola, vi la demo de catálogo digital. Me interesa consultar por: ${product.name}`;
 
   return (
     <article className="group overflow-hidden rounded-3xl border border-rose-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
