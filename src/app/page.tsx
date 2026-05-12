@@ -51,7 +51,7 @@ function FeaturedCard({ product }: { product: Product }) {
           <h3 className="font-bold text-zinc-900">{product.name}</h3>
           <p className="text-sm font-semibold text-brand-700">{product.priceLabel}</p>
         </div>
-        <WhatsAppButton message={`Hola, vengo desde el catálogo web de Innova La Serena. Me interesa consultar por: ${product.name}`} className="px-4 py-2 text-xs">
+        <WhatsAppButton message={`Hola, vi la demo de catálogo digital. Me interesa consultar por: ${product.name}`} className="px-4 py-2 text-xs">
           Consultar
         </WhatsAppButton>
       </div>
@@ -76,9 +76,9 @@ export default function Home() {
         <div className="space-y-5">
           <p className="inline-block rounded-full bg-white px-4 py-1 text-sm font-semibold text-brand-700 shadow-sm">Instagram atrae. La web ordena y vende.</p>
           <div className="space-y-3">
-            <h1 className="text-4xl font-black leading-tight text-zinc-900 md:text-5xl">Innova La Serena</h1>
-            <h2 className="text-xl font-semibold text-zinc-700">Catálogo visual para mostrar productos y vender más ordenado</h2>
-            <p className="max-w-xl text-zinc-600">Una vitrina simple para que tus clientas vean productos, elijan y consulten directo por WhatsApp.</p>
+            <h1 className="text-4xl font-black leading-tight text-zinc-900 md:text-5xl">Catálogo Digital para Tienda Local</h1>
+            <h2 className="text-xl font-semibold text-zinc-700">Una vitrina simple para mostrar productos y recibir consultas por WhatsApp</h2>
+            <p className="max-w-xl text-zinc-600">Ordena tus productos por categorías, comparte un solo link y permite que tus clientes consulten rápido desde el celular.</p>
           </div>
 
           {heroProduct && (
@@ -97,7 +97,7 @@ export default function Home() {
 
           <div className="grid gap-3 sm:flex">
             <a href="#productos" className="inline-flex items-center justify-center rounded-full border border-brand-500 px-6 py-3 text-base font-bold text-brand-700 transition hover:bg-brand-50">Ver catálogo</a>
-            <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información." className="py-3 text-base">
+            <WhatsAppButton message="Hola, vi la demo de catálogo digital para tienda local. Quiero más información." className="py-3 text-base">
               Cotizar por WhatsApp
             </WhatsAppButton>
           </div>
@@ -166,10 +166,11 @@ export default function Home() {
             <h2 className="text-2xl font-black text-zinc-900">Comparte un solo link y recibe consultas</h2>
           </div>
           <div className="mt-4 flex flex-wrap gap-3 md:mt-0">
-            <a href="https://www.instagram.com/innovalaserena918/" target="_blank" rel="noreferrer" className="rounded-full border border-rose-200 px-4 py-2 text-sm font-semibold hover:border-brand-500 hover:text-brand-700">Instagram</a>
-            <a href="https://www.facebook.com/innovaserena?_rdr" target="_blank" rel="noreferrer" className="rounded-full border border-rose-200 px-4 py-2 text-sm font-semibold hover:border-brand-500 hover:text-brand-700">Facebook</a>
-            <WhatsAppButton message="Hola, vengo desde el catálogo web de Innova La Serena. Quiero más información.">WhatsApp</WhatsAppButton>
+            <a href="#" aria-label="Instagram (demo)" className="rounded-full border border-rose-200 px-4 py-2 text-sm font-semibold hover:border-brand-500 hover:text-brand-700">Instagram</a>
+            <a href="#" aria-label="Facebook (demo)" className="rounded-full border border-rose-200 px-4 py-2 text-sm font-semibold hover:border-brand-500 hover:text-brand-700">Facebook</a>
+            <WhatsAppButton message="Hola, vi la demo de catálogo digital para tienda local. Quiero más información.">WhatsApp</WhatsAppButton>
           </div>
+          <p className="mt-3 text-xs text-zinc-500">En una versión real, estos botones apuntan a tus redes.</p>
         </div>
       </section>
       <Footer />
